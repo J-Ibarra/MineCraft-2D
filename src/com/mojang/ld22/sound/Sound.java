@@ -26,7 +26,7 @@ public class Sound {
 		try {
 			new Thread() {
 				public void run() {
-					//clip.play();
+					clip.play();
 				}
 			}.start();
 		} catch (Throwable e) {
