@@ -166,7 +166,7 @@ public class Level {
 				List<Entity> entities = entitiesInTiles[x + y * this.w];
 				for (int i = 0; i < entities.size(); i++) {
 					Entity e = entities.get(i);
-					// e.render(screen);
+					e.render(screen);
 					int lr = e.getLightRadius();
 					if (lr > 0)
 						screen.renderLight(e.x - 1, e.y - 4, lr * 8);

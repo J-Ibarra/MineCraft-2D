@@ -254,6 +254,12 @@ public class Player extends Mob {
 
 		int xo = x - 8;
 		int yo = y - 11;
+		
+		int col = Color.get(-1, 100, 220, 532);
+		if (hurtTime > 0) {
+			col = Color.get(-1, 555, 555, 555);
+		}
+		
 		if (isSwimming()) {
 			yo += 4;
 			int waterColor = Color.get(-1, -1, 115, 335);
@@ -262,6 +268,29 @@ public class Player extends Mob {
 			}
 			screen.render(xo + 0, yo + 3, 5 + 13 * 32, waterColor, 0);
 			screen.render(xo + 8, yo + 3, 5 + 13 * 32, waterColor, 1);
+		} else {
+			screen.render(xo + 8 * flip2, yo + 8, xt + (yt + 1) * 32, col, flip2);
+			screen.render(xo + 8 - 8 * flip2, yo + 8, xt + 1 + (yt + 1) * 32, col, flip2);
+		}
+
+		
+		/*int col = Color.get(-1, 100, 220, 532);
+		if (hurtTime > 0) {
+			col = Color.get(-1, 555, 555, 555);
+		}*/
+
+		if (activeItem instanceof FurnitureItem) {
+			yt += 2;
+		}
+		screen.render(xo + 8 * flip1, yo + 0, xt + yt * 32, col, flip1);
+		screen.render(xo + 8 - 8 * flip1, yo + 0, xt + 1 + yt * 32, col, flip1);
+		
+		if (activeItem instanceof FurnitureItem) {
+			Furniture furniture = ((FurnitureItem) activeItem).furniture;
+			furniture.x = x;
+			furniture.y = yo;
+			furniture.render(screen);
+
 		}
 
 		if (attackTime > 0 && attackDir == 1) {
@@ -270,20 +299,6 @@ public class Player extends Mob {
 			if (attackItem != null) {
 				attackItem.renderIcon(screen, xo + 4, yo - 4);
 			}
-		}
-		int col = Color.get(-1, 100, 220, 532);
-		if (hurtTime > 0) {
-			col = Color.get(-1, 555, 555, 555);
-		}
-
-		if (activeItem instanceof FurnitureItem) {
-			yt += 2;
-		}
-		screen.render(xo + 8 * flip1, yo + 0, xt + yt * 32, col, flip1);
-		screen.render(xo + 8 - 8 * flip1, yo + 0, xt + 1 + yt * 32, col, flip1);
-		if (!isSwimming()) {
-			screen.render(xo + 8 * flip2, yo + 8, xt + (yt + 1) * 32, col, flip2);
-			screen.render(xo + 8 - 8 * flip2, yo + 8, xt + 1 + (yt + 1) * 32, col, flip2);
 		}
 
 		if (attackTime > 0 && attackDir == 2) {
@@ -308,13 +323,7 @@ public class Player extends Mob {
 			}
 		}
 
-		if (activeItem instanceof FurnitureItem) {
-			Furniture furniture = ((FurnitureItem) activeItem).furniture;
-			furniture.x = x;
-			furniture.y = yo;
-			furniture.render(screen);
-
-		}
+		
 	}
 
 	public void touchItem(ItemEntity itemEntity) {
