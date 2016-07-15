@@ -294,7 +294,7 @@ public class Player extends Mob {
 		}
 
 		if (attackTime > 0 && attackDir == 1) {
-			screen.render(xo + 0, yo - 4, 6 + 13 * 32, Color.get(-1, 555, 555, 555), 0);
+			 screen.render(xo + 0, yo - 4, 6 + 13 * 32, Color.get(-1, 555, 555, 555), 0);
 			screen.render(xo + 8, yo - 4, 6 + 13 * 32, Color.get(-1, 555, 555, 555), 1);
 			if (attackItem != null) {
 				attackItem.renderIcon(screen, xo + 4, yo - 4);
